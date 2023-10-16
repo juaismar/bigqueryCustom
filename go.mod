@@ -1,4 +1,4 @@
-module gorm.io/driver/bigquery
+module github.com/juaismar/bigqueryCustom
 
 go 1.16
 
