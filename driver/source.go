@@ -1,10 +1,11 @@
 package driver
 
 import (
-	"cloud.google.com/go/bigquery"
 	"errors"
-	"gorm.io/driver/bigquery/adaptor"
 	"io"
+
+	"cloud.google.com/go/bigquery"
+	"github.com/juaismar/bigqueryCustom/adaptor"
 )
 
 type bigQuerySource interface {

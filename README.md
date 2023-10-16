@@ -20,7 +20,7 @@ package main
 
 import (
     "database/sql"
-    _ "gorm.io/driver/bigquery/driver"
+    _ "github.com/juaismar/bigqueryCustom/driver"
     "log"
 )
 
@@ -44,7 +44,7 @@ Opening a Gorm bigquery db
 package main
 
 import (
-    "gorm.io/driver/bigquery"
+    "github.com/juaismar/bigqueryCustom"
     "gorm.io/gorm"
     "log"
 )
@@ -68,7 +68,7 @@ Using gorm with a BigQuery query that has a record
 package main
 
 import (
-    "gorm.io/driver/bigquery"
+    "github.com/juaismar/bigqueryCustom"
     "gorm.io/gorm"
     "log"
 )
@@ -115,7 +115,7 @@ Using gorm with a BigQuery query that has an array
 package main
 
 import (
-    "gorm.io/driver/bigquery"
+    "github.com/juaismar/bigqueryCustom"
     "gorm.io/gorm"
     "log"
 )
@@ -161,7 +161,7 @@ Using gorm with a BigQuery query that uses unnest
 package main
 
 import (
-    "gorm.io/driver/bigquery"
+    "github.com/juaismar/bigqueryCustom"
     "gorm.io/gorm"
     "log"
 )

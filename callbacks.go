@@ -1,7 +1,7 @@
 package bigquery
 
 import (
-	"gorm.io/driver/bigquery/adaptor"
+	"github.com/juaismar/bigqueryCustom/adaptor"
 	"gorm.io/gorm"
 	"gorm.io/gorm/callbacks"
 )

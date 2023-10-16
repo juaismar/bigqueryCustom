@@ -3,7 +3,7 @@ package test
 import (
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
-	"gorm.io/driver/bigquery"
+	"github.com/juaismar/bigqueryCustom"
 	"gorm.io/gorm"
 	"log"
 )
