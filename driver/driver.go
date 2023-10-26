@@ -5,6 +5,7 @@ import (
 	"database/sql/driver"
 	"fmt"
 	"net/url"
+	"os"
 	"strings"
 
 	"cloud.google.com/go/bigquery"
@@ -42,6 +43,11 @@ func (b bigQueryDriver) Open(uri string) (driver.Conn, error) {
 	}
 	if config.disableAuth {
 		opts = append(opts, option.WithoutAuthentication())
+	}
+
+	jsonCredentials := os.Getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+	if jsonCredentials != "" {
+		opts = append(opts, option.WithCredentialsJSON([]byte(jsonCredentials)))
 	}
 
 	client, err := bigquery.NewClient(ctx, config.projectID, opts...)
