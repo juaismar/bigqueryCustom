@@ -48,6 +48,10 @@ type bigQueryColumn struct {
 
 func (column bigQueryColumn) ConvertValue(value bigquery.Value) (driver.Value, error) {
 
+	if columnAdaptor := column.Adaptor; columnAdaptor != nil {
+		return columnAdaptor.AdaptValue(value)
+	}
+
 	if len(column.Schema) == 0 {
 		return value, nil
 	}
@@ -62,10 +66,6 @@ func (column bigQueryColumn) ConvertValue(value bigquery.Value) (driver.Value, e
 		}
 
 		value = bigQueryReroutedColumn{values: values, schema: column.Schema}
-	}
-
-	if columnAdaptor := column.Adaptor; columnAdaptor != nil {
-		return columnAdaptor.AdaptValue(value)
 	}
 
 	return value, nil

@@ -2,7 +2,9 @@ package bigquery
 
 import (
 	"database/sql/driver"
+	"fmt"
 	"reflect"
+	"time"
 
 	"github.com/juaismar/bigqueryCustom/adaptor"
 	"gorm.io/gorm"
@@ -25,6 +27,8 @@ func (schemaAdaptor *bigQuerySchemaAdaptor) GetColumnAdaptor(name string) adapto
 		}
 
 		switch field.DataType {
+		case "time":
+			return &dateColumnAdaptor{field: field}
 		case adaptor.RecordType, adaptor.ArrayType:
 			return &bigQueryColumnAdaptor{field: field, rootDB: schemaAdaptor.db}
 		}
@@ -68,4 +72,22 @@ func (columnAdaptor *bigQueryColumnAdaptor) GetSchemaAdaptor() adaptor.SchemaAda
 		schema: schema,
 		db:     columnAdaptor.rootDB,
 	}
+}
+
+// Adaptador mejorado para fechas
+type dateColumnAdaptor struct {
+	field *schema.Field
+}
+
+func (columnAdaptor *dateColumnAdaptor) AdaptValue(value driver.Value) (driver.Value, error) {
+	if value == nil {
+		return nil, nil
+	}
+
+	strValue := fmt.Sprintln(value)
+	return time.Parse("2006-01-02", strValue[:10])
+}
+
+func (columnAdaptor *dateColumnAdaptor) GetSchemaAdaptor() adaptor.SchemaAdaptor {
+	return nil // No necesitamos un adaptador de esquema para fechas
 }
